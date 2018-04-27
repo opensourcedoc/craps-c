@@ -4,12 +4,6 @@
 #include <string.h>
 #include <time.h>
 
-#ifdef _WIN32
-    #include <windows.h>
-#else
-    #include <unistd.h>
-#endif
-
 #define PROGRAM "craps"
 #define VERSION "0.1.0"
 
