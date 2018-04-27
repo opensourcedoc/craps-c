@@ -16,7 +16,7 @@ For Windows users, you may get a `make` port at [GnuWin32](http://gnuwin32.sourc
 `craps` default to *pass* bet:
 
 ```
-$ ./craps 
+$ ./craps
 Come-out roll: 6 + 4 = 10
 Got 5 + 6 = 11. Try again...
 Got 2 + 6 = 8. Try again...

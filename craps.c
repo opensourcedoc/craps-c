@@ -32,32 +32,45 @@ int main(int argc, char *argv[])
     bool verbose = true;  // Flag for verbose message.
 
     // Parse command-line arguments without any library.
+    // Run without any argument. Default to *pass* bet.
     if (argc == 1) {
         bet = PASS;
-    } else if (argc >= 2) {
+    }
+    // Run with one or more argument.
+    else if (argc >= 2) {
+        // Print version info and exit.
         if (strcmp(argv[1], "-v") == 0 ||
             strcmp(argv[1], "--version") == 0) {
             printf("%s\n", VERSION);
             return EXIT_SUCCESS;
         }
+        // Print help message and exit.
         else if (strcmp(argv[1], "-h") == 0 ||
             strcmp(argv[1], "--help") == 0) {
             printHelp();
             return EXIT_SUCCESS;
         }
+        // Run in quiet mode.
         else if (strcmp(argv[1], "-q") == 0 ||
             strcmp(argv[1], "--quiet") == 0) {
             verbose = false;
 
+            // Default to *pass* bet.
             if (argc == 2) {
                 bet = PASS;
-            } else if (argc >= 3) {
+            }
+            // Choose either *pass* or *no pass* bet.
+            else if (argc >= 3) {
+                // Choose *pass* bet.
                 if (strcmp(argv[2], "right") == 0) {
                     bet = PASS;
                 }
+                // Choose *no pass* bet.
                 else if (strcmp(argv[2], "wrong") == 0) {
                     bet = NOT_PASS;
                 }
+                // Invalid argument.
+                // Exit the program with both error and help message.
                 else {
                     fprintf(stderr, "Wrong arguments\n");
                     printHelp();
@@ -65,12 +78,16 @@ int main(int argc, char *argv[])
                 }
             }
         }
+        // Choose *pass* bet.
         else if (strcmp(argv[1], "right") == 0) {
             bet = PASS;
         }
+        // Choose *no pass* bet.
         else if (strcmp(argv[1], "wrong") == 0) {
             bet = NOT_PASS;
         }
+        // Invalid argument.
+        // Exit the program with both error and help message.
         else {
             fprintf(stderr, "Wrong arguments\n");
             printHelp();
@@ -78,7 +95,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Init rand seed by current system time.
+    // Init a rand seed by current system time.
     srand((unsigned) time(NULL));
 
     short a, b;
@@ -94,6 +111,7 @@ int main(int argc, char *argv[])
         printf("Come-out roll: %d + %d = %d\n", a, b, comeOut);
     }
 
+    // Craps: *no pass*. End the game.
     if (comeOut== 2 || comeOut == 3 || comeOut == 12) {
         if (verbose) {
             printf("Craps\n");
@@ -101,6 +119,7 @@ int main(int argc, char *argv[])
         result = NOT_PASS;
         over = true;
     }
+    // Natural: *pass*. End the game.
     else if (comeOut == 7) {
         if (verbose) {
             printf("Natural\n");
@@ -115,7 +134,7 @@ int main(int argc, char *argv[])
         a = rand() % 6 + 1;
         b = rand() % 6 + 1;
         sum = a + b;
-        // Hit.
+        // Hit: *pass*. End the game.
         if (sum == comeOut) {
             if (verbose) {
                 printf("Hit: %d + %d = %d\n", a, b, sum);
@@ -123,7 +142,7 @@ int main(int argc, char *argv[])
             result = PASS;
             over = true;
         }
-        // Seven-out.
+        // Seven-out: *no pass*. End the game.
         else if (sum == 7) {
             if (verbose) {
                 printf("Seven-out: %d + %d = %d\n", a, b, sum);
