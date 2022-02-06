@@ -1,4 +1,4 @@
-# Craps in C.
+# Craps in C
 
 This repo demos a simple implementation of [Craps](https://en.wikipedia.org/wiki/Craps) in C.
 
@@ -50,10 +50,6 @@ lose
 
 Run `craps -h` for more usage.
 
-## Author
+## Copyright
 
-Michael Chen, 2018.
-
-## License
-
-MIT
+Copyright (c) 2018 Michelle Chen. Licensed under MIT
